@@ -24,10 +24,10 @@ class UpdateKangarooRequest extends FormRequest
     public function rules()
     {
         return [
-            "name" => "sometimes|unique:kangaroos",
+            "name" => "sometimes|unique:kangaroos,name," . $this->route('kangaroo')->id,
             "nickname" => "nullable",
-            "weight" => "sometimes|decimal|gt:0",
-            "height" => "sometimes|decimal|gt:0",
+            "weight" => "sometimes|decimal:1,5|gt:0",
+            "height" => "sometimes|decimal:1,5|gt:0",
             "gender" => "sometimes",
             "color" => "nullable",
             "friendliness" => "nullable|in:Friendly,Not Friendly",
