@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('kangaroos.indexPage');
 });
 
 Route::get('kangaroos', [KangarooController::class, 'indexPage'])->name('kangaroos.indexPage');
