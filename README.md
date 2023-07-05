@@ -24,6 +24,8 @@ kangaroos. It is your job to help build this out for them.
 
 This app doesnt use docker but can be added if requested.
 
+NOTE: use the main branch
+
 - Clone the repository to your projects folder
 - Copy .env.example to .env
 - Edit .env file input the right credentials(especially DB creds)
