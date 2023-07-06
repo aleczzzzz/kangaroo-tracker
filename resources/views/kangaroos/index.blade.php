@@ -31,7 +31,7 @@
                     const values = {
                         "_method" : "DELETE"
                     };
-                    return $.post(`/api/kangaroos/${key.id}`, values, (data) => data);
+                    return $.post(`/api/kangaroos/${key}`, values, (data) => data);
                 },
             });
             $("#dataGrid").dxDataGrid({
