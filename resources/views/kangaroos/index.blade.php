@@ -94,11 +94,9 @@
                         validationRules: [
                             { 
                                 type: 'required'
-                            }, 
-                            {
-                                type: 'pattern',
-                                message: 'Weight must have decimal!',
-                                pattern: /^\d+([.]\d)?$/i 
+                            },
+                            { 
+                                type: 'numeric' 
                             }
                         ],
                     },
@@ -108,10 +106,8 @@
                             { 
                                 type: 'required' 
                             },
-                            {
-                                type: 'pattern',
-                                message: 'Height must have decimal!',
-                                pattern: /^\d+([.]\d)?$/i 
+                            { 
+                                type: 'numeric' 
                             }
                         ],
                     },
