@@ -26,12 +26,12 @@ class UpdateKangarooRequest extends FormRequest
         return [
             "name" => "sometimes|unique:kangaroos,name," . $this->route('kangaroo')->id,
             "nickname" => "nullable",
-            "weight" => "sometimes|decimal:1,5|gt:0",
-            "height" => "sometimes|decimal:1,5|gt:0",
+            "weight" => "sometimes|decimal:0,5|gt:0",
+            "height" => "sometimes|decimal:0,5|gt:0",
             "gender" => "sometimes",
             "color" => "nullable",
             "friendliness" => "nullable|in:Friendly,Not Friendly",
-            "birthday" => "sometimes|date"
+            "birthday" => "sometimes|date|date_format:m/d/Y"
         ];
     }
 }

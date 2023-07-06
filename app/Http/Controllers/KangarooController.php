@@ -7,6 +7,7 @@ use App\Http\Requests\StoreKangarooRequest;
 use App\Http\Requests\UpdateKangarooRequest;
 use App\Http\Resources\KangarooCollection;
 use App\Http\Resources\KangarooResource;
+use Illuminate\Http\Request;
 
 class KangarooController extends Controller
 {
@@ -91,6 +92,16 @@ class KangarooController extends Controller
 
         return response()->json([
             'message' => 'Successfully Deleted Kangaroo.'
+        ], 200);
+    }
+
+    public function checkName(Request $request)
+    {
+        $kangaroos = Kangaroo::where('name', 'LIKE', '%' . $request->value . '%')->count();
+
+        return response()->json([
+            'exists' => $kangaroos ? true : false,
+            'message' => $kangaroos ? 'Kangaroo name already exist.' : 'Kangaroo name available.'
         ], 200);
     }
 }

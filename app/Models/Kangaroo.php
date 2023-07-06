@@ -19,4 +19,8 @@ class Kangaroo extends Model
         "friendliness",
         "birthday"
     ];
+
+    protected $dates = [
+        "birthday"
+    ];
 }

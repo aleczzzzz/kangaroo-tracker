@@ -26,12 +26,12 @@ class StoreKangarooRequest extends FormRequest
         return [
             "name" => "required|unique:kangaroos",
             "nickname" => "nullable",
-            "weight" => "required|decimal:1,5|gt:0",
-            "height" => "required|decimal:1,5|gt:0",
+            "weight" => "required|decimal:0,5|gt:0",
+            "height" => "required|decimal:0,5|gt:0",
             "gender" => "required",
             "color" => "nullable",
             "friendliness" => "nullable|in:Friendly,Not Friendly",
-            "birthday" => "required|date"
+            "birthday" => "required|date|date_format:m/d/Y"
         ];
     }
 }

@@ -26,7 +26,26 @@
             @yield('content')
         </div>
         <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cldrjs/0.5.0/cldr.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cldrjs/0.5.0/cldr/event.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/cldrjs/0.5.0/cldr/supplemental.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.3.0/globalize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.3.0/globalize/message.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.3.0/globalize/number.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.3.0/globalize/currency.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/globalize/1.3.0/globalize/date.min.js"></script>
+        <!-- DevExtreme library -->
         <script src="https://cdn3.devexpress.com/jslib/23.1.3/js/dx.all.js"></script>
+        <!-- Dictionary files for German language -->
+        <script src="https://cdn3.devexpress.com/jslib/23.1.3/js/localization/dx.messages.de.js"></script>
+        <!-- Common and language-specific CLDR data -->
+        <script src="https://unpkg.com/devextreme-cldr-data/supplemental.js"></script>
+        <script src="https://unpkg.com/devextreme-cldr-data/de.js"></script>
+        <script>
+            $(function() {
+                Globalize.locale(navigator.language);
+            });
+        </script>
         @stack('scripts')
     </body>
 </html>

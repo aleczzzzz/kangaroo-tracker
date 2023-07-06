@@ -16,7 +16,7 @@
         $(function() {
             const URL = '';
             const kangaroosStore = new DevExpress.data.CustomStore({
-                // key: 'id',
+                key: 'id',
                 load() {
                     return $.get(`/api/kangaroos`, (data) => data);
                 },
@@ -25,7 +25,7 @@
                 },
                 update(key, values) {
                     values['_method'] = 'PATCH';
-                    return $.post(`/api/kangaroos/${key.id}`, values, (data) => data);
+                    return $.post(`/api/kangaroos/${key}`, values, (data) => data);
                 },
                 remove(key) {
                     const values = {
@@ -36,7 +36,6 @@
             });
             $("#dataGrid").dxDataGrid({
                 dataSource: kangaroosStore,
-                keyExpr: "id",
                 searchPanel: {
                     visible: true,
                     highlightCaseSensitive: false,
@@ -45,7 +44,40 @@
                     {
                         dataField: 'name',
                         dataType: 'string',
-                        validationRules: [{ type: 'required' }],
+                        validationRules: [
+                            { 
+                                type: 'required'
+                            },
+                            {
+                                type: 'async',
+                                message: 'Kangaroo name already exist.',
+                                validationCallback(params) {
+                                    // const d = $.Deferred();
+                                    // $.ajax({
+                                    //     url: `/api/kangaroos/check-name?value=${params.value}`
+                                    // }).done(function(res){
+                                    //     if (res.exists) {
+                                    //         d.reject(res.message);
+                                    //     } else {
+                                    //         d.resolve(res.message);
+                                    //     }
+                                    // })
+                                    // return d.promise();
+                                    return new Promise(function(resolve, reject) {
+                                        $.ajax({
+                                            url: `/api/kangaroos/check-name?value=${params.value}`
+                                        }).done(function(res){
+                                            console.log(res);
+                                            if (res.exists) {
+                                                reject(res.message);
+                                            } else {
+                                                resolve(res.message);
+                                            }
+                                        });
+                                    });
+                                },
+                            }
+                        ],
                     },
                     {
                         dataField: 'nickname',
@@ -59,14 +91,33 @@
                     },
                     {
                         dataField: 'weight',
-                        validationRules: [{ type: 'required' }],
+                        validationRules: [
+                            { 
+                                type: 'required'
+                            }, 
+                            {
+                                type: 'pattern',
+                                message: 'Weight must have decimal!',
+                                pattern: /^\d+([.]\d)?$/i 
+                            }
+                        ],
                     },
                     {
                         dataField: 'height',
-                        validationRules: [{ type: 'required' }],
+                        validationRules: [
+                            { 
+                                type: 'required' 
+                            },
+                            {
+                                type: 'pattern',
+                                message: 'Height must have decimal!',
+                                pattern: /^\d+([.]\d)?$/i 
+                            }
+                        ],
                     },
                     {
                         dataField: 'gender',
+                        validationRules: [{ type: 'required' }],
                         visible: false
                     },
                     {
@@ -99,10 +150,12 @@
                                     dataField: 'nickname'
                                 },
                                 {
-                                    dataField: 'weight'
+                                    dataField: 'weight',
+                                    editorType: 'dxNumberBox',
                                 },
                                 {
-                                    dataField: 'height'
+                                    dataField: 'height',
+                                    editorType: 'dxNumberBox',
                                 },
                                 {
                                     dataField: 'gender',
@@ -129,7 +182,16 @@
                                 },
                                 {
                                     dataField: 'birthday',
-                                    editorType: 'dxDateBox'
+                                    editorType: 'dxDateBox',
+                                    editorOptions: {
+                                        // placeholder: '10/16/2018',
+                                        dateSerializationFormat: "MM/dd/yyyy",
+                                        displayFormat: 'shortDate',
+                                        format: {
+                                            type: 'shortDate'
+                                        },
+                                        showClearButton: true,
+                                    },
                                 },
                             ]
                         }]
