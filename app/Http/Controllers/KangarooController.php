@@ -97,7 +97,9 @@ class KangarooController extends Controller
 
     public function checkName(Request $request)
     {
-        $kangaroos = Kangaroo::where('name', 'LIKE', '%' . $request->value . '%')->count();
+        $kangaroos = Kangaroo::where('name', $request->value)->count();
+
+        return $kangaroos;
 
         return response()->json([
             'exists' => $kangaroos ? true : false,
